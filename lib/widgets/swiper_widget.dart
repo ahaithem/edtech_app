@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../constns/color_text_size.dart';
 
 class SwiperWidget extends StatefulWidget {
   const SwiperWidget(
@@ -19,6 +20,7 @@ class _SwiperWidgetState extends State<SwiperWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      //width: double.infinity,
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -34,15 +36,21 @@ class _SwiperWidgetState extends State<SwiperWidget> {
               widget.title, // Access widget properties with `widget.<property>`
               textAlign: TextAlign.center,
               style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 25,
-                  fontWeight: FontWeight.w900),
+                //height: 16,
+                //letterSpacing: -0.5,
+                color: Colors.black,
+                fontSize: 24,
+                fontWeight: FontWeight.w900,
+              ),
             ),
             Text(
               widget
                   .subTitle, // Access widget properties with `widget.<property>`
               textAlign: TextAlign.center,
-              style: const TextStyle(color: Colors.grey, fontSize: 14),
+              style: TextStyle(
+                  //height: 14,
+                  color: subtitle_color,
+                  fontSize: 14),
             )
           ],
         ),
