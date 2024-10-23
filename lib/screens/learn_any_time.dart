@@ -79,7 +79,9 @@ class LearnAnyTime extends StatelessWidget {
                   minimumSize: const Size(
                       double.infinity, 60), // Width and height of the button
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushNamed('login');
+                },
                 child: const Text(
                   'Next',
                   style: TextStyle(fontSize: 16),

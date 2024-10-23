@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './screens/first_screen.dart';
 import './screens/learn_any_time.dart';
+import './screens/log_in.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
       home: const FirstScreen(),
       routes: {
         'learnanytime': (context) => LearnAnyTime(),
+        'login': (context) => LogIn()
       },
     );
   }
