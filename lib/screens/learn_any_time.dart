@@ -68,17 +68,15 @@ class LearnAnyTime extends StatelessWidget {
           SizedBox(height: screenHeight * 0.02), // Move the button up a bit
           SizedBox(
               width: screenWidth * 0.7, // Match the Swiper width
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: primary_color, // Background color
-                  foregroundColor: Colors.white, // Text color
-                  shape: RoundedRectangleBorder(
-                    // Optional: to make the corners round
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  minimumSize: const Size(
-                      double.infinity, 60), // Width and height of the button
+              child: MaterialButton(
+                color: primary_color, // Background color
+                textColor: Colors.white, // Text color
+                shape: RoundedRectangleBorder(
+                  // Optional: to make the corners round
+                  borderRadius: BorderRadius.circular(16),
                 ),
+                //minWidth: double.infinity, // Width of the button
+                height: 56, // Height of the button
                 onPressed: () {
                   Navigator.of(context).pushNamed('login');
                 },
