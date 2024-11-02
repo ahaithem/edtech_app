@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import './profile_content.dart';
+import '../constns/color_text_size.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -16,72 +18,37 @@ class _ProfileState extends State<Profile> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            GestureDetector(
-              onTap: () {},
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.8, // 80% width
-                child: Container(
-                  padding: EdgeInsets.all(40.0), // Padding inside the container
-                  decoration: BoxDecoration(
-                    color: Colors.white, // Background color of the container
-                    borderRadius:
-                        BorderRadius.circular(12.0), // Rounded corners
-                    border: Border.all(
-                      color: Colors.grey, // Border color
-                      width: 2.0, // Border width
-                    ),
-                  ),
-                  child: Text(
-                    'Hello World',
-                    textAlign: TextAlign.center, // Center text horizontally
-                  ),
-                ),
-              ),
+            ProfileContent(
+              title: 'Your Courses',
+              onTap: () {
+                // Your onTap logic here
+              },
             ),
-            SizedBox(height: 16.0), // Spacing between containers
-            GestureDetector(
-              onTap: () {},
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.8, // 80% width
-                child: Container(
-                  padding: EdgeInsets.all(40.0),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12.0),
-                    border: Border.all(
-                      color: Colors.grey,
-                      width: 2.0,
-                    ),
-                  ),
-                  child: Text(
-                    'Hello World',
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
+            const SizedBox(height: 16.0), // Spacing between containers
+            ProfileContent(
+              title: 'Saved',
+              onTap: () {
+                // Your onTap logic here
+              },
             ),
-            SizedBox(height: 16.0), // Spacing between containers
-            GestureDetector(
-              onTap: () {},
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.8, // 80% width
-                child: Container(
-                  padding: EdgeInsets.all(40.0),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12.0),
-                    border: Border.all(
-                      color: Colors.grey,
-                      width: 2.0,
-                    ),
-                  ),
-                  child: Text(
-                    'Hello World',
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
+
+            const SizedBox(height: 16.0), // Spacing between containers
+            ProfileContent(
+              title: 'Payment',
+              onTap: () {
+                // Your onTap logic here
+              },
             ),
+            const SizedBox(height: 16.0), // Spacing between containers
+            InkWell(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Text(
+                'Logout',
+                style: TextStyle(color: subtitle_color, fontSize: 14),
+              ),
+            )
           ],
         ),
       ),

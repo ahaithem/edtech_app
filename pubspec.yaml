@@ -71,12 +71,15 @@ flutter:
     - assets/images/4.png
     - assets/images/5.png
     - assets/images/6.png
+    - assets/images/7.png
     - assets/icons/fb_icon.png
     - assets/icons/google_icon.png
     - assets/icons/ig_icon.png
     - assets/icons/course_icon.png
     - assets/icons/profile_icon.png
     - assets/icons/setting_icon.png
+    - assets/icons/next.png
+    - assets/icons/next-arrow.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
