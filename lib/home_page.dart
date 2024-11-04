@@ -27,6 +27,7 @@ class _HomePageState extends State<HomePage> {
         child: widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: Container(
+        //padding: const EdgeInsets.only(top: 8.0),
         decoration: const BoxDecoration(
           color: Colors.grey, // Background color of the container
           border: Border(
@@ -47,11 +48,11 @@ class _HomePageState extends State<HomePage> {
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.business),
+              icon: Icon(Icons.person),
               label: 'Business',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.school),
+              icon: Icon(Icons.settings),
               label: 'School',
             ),
           ],

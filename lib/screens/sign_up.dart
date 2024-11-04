@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import '../constns/color_text_size.dart';
 import '../widgets/text_form_field.dart';
 import '../widgets/log_button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -19,6 +21,8 @@ class _SignUpState extends State<SignUp> {
   GlobalKey<FormState> formState = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    // Create a CollectionReference called users that references the firestore collection
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
@@ -49,6 +53,7 @@ class _SignUpState extends State<SignUp> {
                 CostomTextForm(
                   hintText: 'Name',
                   mycontroller: name,
+                  //To ensure that the name field is not empty
                   validator: (value) {
                     if (value == '') {
                       return 'Cannot be empty';
@@ -59,6 +64,7 @@ class _SignUpState extends State<SignUp> {
                 CostomTextForm(
                   hintText: 'Email',
                   mycontroller: email,
+                  //To ensure that the email field is not empty
                   validator: (value) {
                     if (value == '') {
                       return 'Cannot be empty';
@@ -70,6 +76,7 @@ class _SignUpState extends State<SignUp> {
                   hintText: 'Password',
                   mycontroller: password,
                   validator: (value) {
+                    //To ensure that the password field is not empty
                     if (value == '') {
                       return 'Cannot be empty';
                     }
@@ -77,46 +84,54 @@ class _SignUpState extends State<SignUp> {
                 ),
                 const SizedBox(height: 10),
                 CostomButtonAuth(
-                  title: 'Sign up',
-                  onPressed: () async {
-                    if (formState.currentState!.validate()) {
-                      try {
-                        final credential = await FirebaseAuth.instance
-                            .createUserWithEmailAndPassword(
-                          email: email.text,
-                          password: password.text,
-                        );
-                        FirebaseAuth.instance.currentUser!
-                            .sendEmailVerification();
-                        print(password.text);
-                        //Navigator.of(context).pushReplacementNamed('login');
-                        Navigator.of(context).pop();
-                      } on FirebaseAuthException catch (e) {
-                        if (e.code == 'weak-password') {
-                          print('The password provided is too weak.');
-                          AwesomeDialog(
-                            context: context,
-                            dialogType: DialogType.error,
-                            animType: AnimType.rightSlide,
-                            title: 'Dialog Title',
-                            desc: 'The password provided is too weak.',
-                          )..show();
-                        } else if (e.code == 'email-already-in-use') {
-                          print('The account already exists for that email.');
-                          AwesomeDialog(
-                            context: context,
-                            dialogType: DialogType.error,
-                            animType: AnimType.rightSlide,
-                            title: 'Dialog Title',
-                            desc: 'The account already exists for that email.',
-                          )..show();
+                    title: 'Sign up',
+                    //To ensure that the form is not empty and valid
+                    onPressed: () async {
+                      if (formState.currentState!.validate()) {
+                        try {
+                          final credential = await FirebaseAuth.instance
+                              .createUserWithEmailAndPassword(
+                            email: email.text,
+                            password: password.text,
+                          );
+
+                          FirebaseAuth.instance.currentUser!
+                              .sendEmailVerification();
+
+                          // Immediately add user to Firestore after creation
+                          await users.add({
+                            'id': FirebaseAuth.instance.currentUser!.uid,
+                            'full_name': name.text,
+                            'email': email.text,
+                            'password': password.text,
+                          });
+                          print("User Added");
+
+                          Navigator.of(context).pop(); // Go back to login page
+                        } on FirebaseAuthException catch (e) {
+                          if (e.code == 'weak-password') {
+                            AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.error,
+                              animType: AnimType.rightSlide,
+                              title: 'Weak Password',
+                              desc: 'The password provided is too weak.',
+                            )..show();
+                          } else if (e.code == 'email-already-in-use') {
+                            AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.error,
+                              animType: AnimType.rightSlide,
+                              title: 'Email In Use',
+                              desc:
+                                  'The account already exists for that email.',
+                            )..show();
+                          }
+                        } catch (e) {
+                          print(e);
                         }
-                      } catch (e) {
-                        print(e);
                       }
-                    }
-                  },
-                ),
+                    }),
                 const SizedBox(height: 10),
                 InkWell(
                   onTap: () {

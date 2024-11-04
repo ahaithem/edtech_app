@@ -127,6 +127,7 @@ class _LogInState extends State<LogIn> {
                               setState(() {});
                               print(
                                   'Login successful: ${credential.user?.email}');
+                              //To check if the email that was entered by the user when he sign up is is verified and if not he can't go to the homepage
                               if (credential.user!.emailVerified) {
                                 Navigator.of(context).pushNamed('homepage');
                               } else {
