@@ -44,16 +44,16 @@ class _HomePageState extends State<HomePage> {
         child: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
+              icon: Icon(Icons.book),
+              label: 'Courses',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
-              label: 'Business',
+              label: 'Profile',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.settings),
-              label: 'School',
+              label: 'Settings',
             ),
           ],
           currentIndex: _selectedIndex,
