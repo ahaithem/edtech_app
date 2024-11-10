@@ -15,7 +15,7 @@ class ProfileContent extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.8, // 80% width
+        width: MediaQuery.of(context).size.width * 0.9, // 90% width
         child: Container(
           padding: const EdgeInsets.all(40.0),
           decoration: BoxDecoration(
