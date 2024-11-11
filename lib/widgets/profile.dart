@@ -18,6 +18,7 @@ class _ProfileState extends State<Profile> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            const SizedBox(height: 16.0), // Spacing between containers
             ProfileContent(
               title: 'Your Courses',
               onTap: () {
