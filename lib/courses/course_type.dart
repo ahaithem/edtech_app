@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'video_list_screen.dart'; // Import VideoListScreen
 import 'api_key_google_console.dart';
 import '../constns/color_text_size.dart';
+import 'about_course.dart';
 
 class CourseType extends StatelessWidget {
   final String courseTitle;
@@ -25,15 +26,26 @@ class CourseType extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         // Navigate to VideoListScreen with playlistId and apiKey
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => VideoListScreen(
+        //       playlistId: coursePlaylistId,
+        //       apiKey: API_KEY,
+        //     ),
+        //   ),
+        // );
         Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => VideoListScreen(
-              playlistId: coursePlaylistId,
-              apiKey: API_KEY,
-            ),
-          ),
-        );
+            context,
+            MaterialPageRoute(
+                builder: (context) => AboutCourse(
+                    courseTitle: courseTitle,
+                    imageUrl: courseImageUrl,
+                    duration: courseDuration,
+                    aboutCourse:
+                        "You can launch a new career in web develop-ment today by learning HTML & CSS. You don't need a computer science degree or expensive software. All you need is a computer, a bit of time, a lot of determination, and a teacher you trust.",
+                    coursePrice: coursePrice,
+                    coursePlaylistId: coursePlaylistId)));
       },
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.9, // 90% width
