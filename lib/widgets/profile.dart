@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './profile_content.dart';
 import '../constns/color_text_size.dart';
+import 'checkout.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -23,6 +24,7 @@ class _ProfileState extends State<Profile> {
               title: 'Your Courses',
               onTap: () {
                 // Your onTap logic here
+                Navigator.pushNamed(context, 'checkout');
               },
             ),
             const SizedBox(height: 16.0), // Spacing between containers

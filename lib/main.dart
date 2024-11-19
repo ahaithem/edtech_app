@@ -1,18 +1,26 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import './screens/first_screen.dart';
 import './screens/learn_any_time.dart';
 import './screens/log_in.dart';
 import './screens/sign_up.dart';
 import 'home_page.dart';
+import 'models/cart.dart';
+import './widgets/checkout.dart';
 // Import the generated file
 import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => Cart(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -48,6 +56,7 @@ class _MyAppState extends State<MyApp> {
         'login': (context) => LogIn(),
         'signup': (context) => SignUp(),
         'homepage': (context) => HomePage(),
+        'checkout': (context) => Checkout(),
       },
     );
   }

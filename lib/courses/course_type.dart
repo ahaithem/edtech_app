@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'video_list_screen.dart'; // Import VideoListScreen
-import 'api_key_google_console.dart';
 import '../constns/color_text_size.dart';
 import 'about_course.dart';
 

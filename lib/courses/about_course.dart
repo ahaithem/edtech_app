@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'course_type.dart';
 import 'video_list_screen.dart';
 import '../constns/color_text_size.dart';
 import 'api_key_google_console.dart';
+import '../models/cart.dart';
+import 'package:provider/provider.dart';
 
 class AboutCourse extends StatelessWidget {
   final String courseTitle;
@@ -34,7 +37,7 @@ class AboutCourse extends StatelessWidget {
                 decoration: const BoxDecoration(
                   // color:
                   //   Color(0xFFF8F2EE), // Background color for image and text
-                  borderRadius: const BorderRadius.only(
+                  borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(12.0),
                     topRight: Radius.circular(12.0),
                   ),
@@ -114,7 +117,6 @@ class AboutCourse extends StatelessWidget {
                     // Optional: to make the corners round
                     borderRadius: BorderRadius.circular(16),
                   ),
-                  //minWidth: double.infinity, // Width of the button
                   height: 56, // Height of the button
                   onPressed: () {
                     // Navigate to VideoListScreen with playlistId and apiKey
@@ -133,6 +135,53 @@ class AboutCourse extends StatelessWidget {
                     style: TextStyle(fontSize: 16),
                   ),
                 )),
+            const SizedBox(height: 20),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.7,
+              child: MaterialButton(
+                color: secondary_color, // Background color
+                textColor: Colors.white, // Text color
+                shape: RoundedRectangleBorder(
+                  // Optional: to make the corners round
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                height: 56, // Height of the button
+                onPressed: () {
+                  // Create a new course instance to add to the cart
+                  final course = CourseType(
+                    courseTitle: courseTitle,
+                    courseDuration: duration,
+                    courseDescription: aboutCourse,
+                    courseImageUrl: imageUrl,
+                    coursePrice: coursePrice,
+                    coursePlaylistId: coursePlaylistId,
+                  );
+
+                  // Add the course to the cart
+                  Provider.of<Cart>(context, listen: false).add(course);
+
+                  // Optional: Show confirmation message
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('$courseTitle has been added to the cart!'),
+                      duration: const Duration(seconds: 2),
+                    ),
+                  );
+                },
+
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.shopping_cart, size: 24), // Shopping cart icon
+                    SizedBox(width: 8), // Space between icon and text
+                    Text(
+                      'Add To Cart',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         )),
       ),
