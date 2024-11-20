@@ -14,17 +14,6 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: PreferredSize(
-      //   preferredSize: const Size.fromHeight(kToolbarHeight),
-      //   child: Container(
-      //     alignment: Alignment.center,
-      //     child: ConstrainedBox(
-      //       constraints:
-      //           BoxConstraints(maxWidth: 400), // Adjust the width as needed
-      //       child: AppBarWidget(title: 'Profile'),
-      //     ),
-      //   ),
-      // ),
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
         child: AppBarWidget(title: 'Profile'),

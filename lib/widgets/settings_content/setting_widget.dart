@@ -1,3 +1,4 @@
+import 'package:edtech_app/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 import '../../constns/color_text_size.dart';
 import 'notification_setting.dart';
@@ -71,6 +72,10 @@ class _SettingWidgetState extends State<SettingWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(kToolbarHeight),
+        child: AppBarWidget(title: 'Settings'),
+      ),
       body: Center(
         child: SingleChildScrollView(
           child: Column(

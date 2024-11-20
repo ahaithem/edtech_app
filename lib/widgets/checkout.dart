@@ -1,3 +1,4 @@
+import 'package:edtech_app/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/cart.dart';
@@ -8,8 +9,9 @@ class Checkout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Checkout'),
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(kToolbarHeight),
+        child: AppBarWidget(title: 'Your Courses'),
       ),
       body: Consumer<Cart>(
         builder: (context, cart, child) {

@@ -1,3 +1,4 @@
+import 'package:edtech_app/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'course_type.dart';
 import 'video_list_screen.dart';
@@ -25,6 +26,10 @@ class AboutCourse extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(kToolbarHeight),
+        child: AppBarWidget(title: courseTitle),
+      ),
       body: Center(
         child: SingleChildScrollView(
             child: Column(
@@ -67,18 +72,16 @@ class AboutCourse extends StatelessWidget {
             const SizedBox(height: 20),
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.9, // 90% width
-              child: Center(
-                child: Text(
-                  courseTitle,
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
+              child: Text(
+                'About the course',
+                style: TextStyle(
+                  color: text_color,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.9, // 90% width
               child: Center(
@@ -92,17 +95,27 @@ class AboutCourse extends StatelessWidget {
                 ),
               ),
             ),
+            const SizedBox(height: 20),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.9, // 90% width
+              child: Text(
+                'Duration',
+                style: TextStyle(
+                  color: text_color,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
             const SizedBox(height: 10),
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.9, // 90% width
-              child: Center(
-                child: Text(
-                  duration,
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+              child: Text(
+                duration,
+                style: TextStyle(
+                  color: text_color,
+                  fontSize: 20,
+                  //fontWeight: FontWeight.bold,
                 ),
               ),
             ),
