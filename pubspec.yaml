@@ -92,6 +92,7 @@ flutter:
     - assets/icons/setting_icon.png
     - assets/icons/next.png
     - assets/icons/next-arrow.png
+    - assets/icons/back.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

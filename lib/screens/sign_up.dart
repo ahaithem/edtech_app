@@ -6,6 +6,7 @@ import '../widgets/text_form_field.dart';
 import '../widgets/log_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import '../widgets/app_bar.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -24,6 +25,13 @@ class _SignUpState extends State<SignUp> {
     // Create a CollectionReference called users that references the firestore collection
     CollectionReference users = FirebaseFirestore.instance.collection('users');
     return Scaffold(
+      // The PreferredSize widget is used to set the preferred size of the app bar.
+      // Here, it is used to ensure that the custom AppBarWidget has the same height
+      // as the standard AppBar, which is defined by kToolbarHeight.
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(kToolbarHeight),
+        child: AppBarWidget(title: ''),
+      ),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20),
@@ -35,11 +43,11 @@ class _SignUpState extends State<SignUp> {
               children: [
                 Image.asset('assets/images/6.png'),
                 const SizedBox(height: 10),
-                const Text(
+                Text(
                   'Sign up',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.black,
+                    color: text_color,
                     fontSize: 24,
                     fontWeight: FontWeight.w900,
                   ),
