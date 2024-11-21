@@ -28,6 +28,34 @@ class _CourseState extends State<Course> {
         courseImageUrl: 'assets/images/8.png',
         coursePrice: '50',
         coursePlaylistId: 'PLIhvC56v63ILPDA2DQBv0IKzqsWTZxCkp'),
+    const CourseType(
+        courseTitle: 'Figma UX Design UI Essentials',
+        courseDuration: '2 h 30 min',
+        courseDescription: 'UI/UX Essentials',
+        courseImageUrl: 'assets/images/8.png',
+        coursePrice: '50',
+        coursePlaylistId: 'PL0lNJEnwfVVOQ8qKmLoT7tLdTDKhEDzmG'),
+    const CourseType(
+        courseTitle: 'UI & UX',
+        courseDuration: '2 h',
+        courseDescription: 'Learn UI & UX for beginners',
+        courseImageUrl: 'assets/images/8.png',
+        coursePrice: '50',
+        coursePlaylistId: 'PLmQ0KfqeaHAuud_Aav-94nfToArf6Uh4K'),
+    const CourseType(
+        courseTitle: 'HTML',
+        courseDuration: '4 h',
+        courseDescription: 'Learn HTML from scratch',
+        courseImageUrl: 'assets/images/8.png',
+        coursePrice: '50',
+        coursePlaylistId: 'PLDoPjvoNmBAw_t_XWUFbBX-c9MafPk9ji'),
+    const CourseType(
+        courseTitle: 'CSS tutorials',
+        courseDuration: '12 h',
+        courseDescription: 'Learn CSS for beginners',
+        courseImageUrl: 'assets/images/8.png',
+        coursePrice: '50',
+        coursePlaylistId: 'PL0Zuz27SZ-6Mx9fd9elt80G1bPcySmWit'),
   ];
   List<CourseType> _filteredCourses = [];
 
@@ -56,39 +84,42 @@ class _CourseState extends State<Course> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.only(top: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.9, // 90% width
-                child: TextField(
-                  controller: _searchController,
-                  decoration: InputDecoration(
-                    labelText: 'Search course',
-                    border: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: border_color), // border color
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: warning_color), // Focused border color
-                    ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 16, right: 16, left: 16),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.9, // 90% width
+              child: TextField(
+                controller: _searchController,
+                decoration: InputDecoration(
+                  labelText: 'Search course',
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: border_color),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: warning_color),
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
-              ..._filteredCourses.map((course) => Column(
-                    children: [
-                      course,
-                      const SizedBox(height: 20),
-                    ],
-                  )),
-            ],
+            ),
           ),
-        ),
+          Expanded(
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.9, // 90% width
+              child: ListView.builder(
+                //padding: const EdgeInsets.symmetric(horizontal: 16),
+                itemCount: _filteredCourses.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    padding: EdgeInsets.only(bottom: 15),
+                    child: _filteredCourses[index],
+                  ); // Directly return the course
+                },
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
