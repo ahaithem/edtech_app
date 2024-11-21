@@ -10,15 +10,16 @@ import 'home_page.dart';
 import 'models/cart.dart';
 import './widgets/checkout.dart';
 // Import the generated file
-import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => Cart(),
-      child: MyApp(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => Cart()),
+      ],
+      child: const MyApp(),
     ),
   );
 }

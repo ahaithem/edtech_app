@@ -15,7 +15,7 @@ class Checkout extends StatelessWidget {
       ),
       body: Consumer<Cart>(
         builder: (context, cart, child) {
-          final items = cart.bascketitems; // List of courses in the cart
+          final items = cart.basketItems; // List of courses in the cart
           return items.isEmpty
               ? const Center(
                   child: Text(
