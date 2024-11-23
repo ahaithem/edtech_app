@@ -19,43 +19,45 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: widgetOptions.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: Container(
-        //padding: const EdgeInsets.only(top: 8.0),
-        decoration: const BoxDecoration(
-          color: Colors.grey, // Background color of the container
-          border: Border(
-            top: BorderSide(
-              color: Colors.grey, // Color of the top border
-              width: 1.0, // Thickness of the top border
-            ),
-          ),
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(12.0), // Radius for top-left corner
-            topRight: Radius.circular(12.0), // Radius for top-right corner
-          ),
+    return SafeArea(
+      child: Scaffold(
+        body: Center(
+          child: widgetOptions.elementAt(_selectedIndex),
         ),
-        child: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.book),
-              label: 'Courses',
+        bottomNavigationBar: Container(
+          //padding: const EdgeInsets.only(top: 8.0),
+          decoration: const BoxDecoration(
+            color: Colors.grey, // Background color of the container
+            border: Border(
+              top: BorderSide(
+                color: Colors.grey, // Color of the top border
+                width: 1.0, // Thickness of the top border
+              ),
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Profile',
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(12.0), // Radius for top-left corner
+              topRight: Radius.circular(12.0), // Radius for top-right corner
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'Settings',
-            ),
-          ],
-          currentIndex: _selectedIndex,
-          selectedItemColor: Colors.amber[800],
-          onTap: _onItemTapped,
+          ),
+          child: BottomNavigationBar(
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.book),
+                label: 'Courses',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: 'Profile',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.settings),
+                label: 'Settings',
+              ),
+            ],
+            currentIndex: _selectedIndex,
+            selectedItemColor: Colors.amber[800],
+            onTap: _onItemTapped,
+          ),
         ),
       ),
     );
