@@ -105,7 +105,47 @@ class _LogInState extends State<LogIn> {
                       ),
                       const SizedBox(height: 10),
                       InkWell(
-                        onTap: () {},
+                        onTap: () async {
+                          //To verify that the email dosn't empty so we can send email verification
+                          if (email.text == '') {
+                            AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.warning,
+                              animType: AnimType.rightSlide,
+                              title: 'Email Empty',
+                              desc: 'Please Enter your email',
+                              btnOkOnPress: () {}, // Action for OK button
+                            ).show();
+                            return;
+                          }
+                          try {
+                            //To send email verification so the user can reset his password
+                            await FirebaseAuth.instance
+                                .sendPasswordResetEmail(email: email.text);
+                            AwesomeDialog(
+                              // ignore: use_build_context_synchronously
+                              context: context,
+                              dialogType: DialogType.success,
+                              animType: AnimType.rightSlide,
+                              title: 'Check Your Email',
+                              desc:
+                                  'please check your email and click on the verification link to reset your password',
+                              btnOkOnPress: () {}, // Action for OK button
+                            ).show();
+                          } catch (e) {
+                            print(e);
+                            AwesomeDialog(
+                              // ignore: use_build_context_synchronously
+                              context: context,
+                              dialogType: DialogType.warning,
+                              animType: AnimType.rightSlide,
+                              title: 'No existing Email',
+                              desc:
+                                  'please check the email that you have entred and repeat again',
+                              btnOkOnPress: () {}, // Action for OK button
+                            ).show();
+                          }
+                        },
                         child: Text(
                           'Forgot your password?',
                           style: TextStyle(color: subtitle_color, fontSize: 14),

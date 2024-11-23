@@ -9,6 +9,7 @@ import './screens/sign_up.dart';
 import 'home_page.dart';
 import 'models/cart.dart';
 import './widgets/checkout.dart';
+import './widgets/settings_content/reset_password.dart';
 // Import the generated file
 
 void main() async {
@@ -58,6 +59,7 @@ class _MyAppState extends State<MyApp> {
         'signup': (context) => SignUp(),
         'homepage': (context) => HomePage(),
         'checkout': (context) => Checkout(),
+        'resetpassword': (context) => ResetPassword(),
       },
     );
   }

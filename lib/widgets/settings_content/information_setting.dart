@@ -7,8 +7,7 @@ class InformationSetting extends StatefulWidget {
   final Icon iconType;
 
   const InformationSetting(
-      {Key? key,
-      required this.informationType,
+      {required this.informationType,
       required this.iconType,
       required this.informationValue});
 

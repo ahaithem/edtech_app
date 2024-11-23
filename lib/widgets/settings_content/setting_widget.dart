@@ -98,11 +98,14 @@ class _SettingWidgetState extends State<SettingWidget> {
                 ),
               ),
               const SizedBox(height: 20),
-              InformationSetting(
-                informationType: 'Name',
-                iconType: const Icon(Icons.person),
-                informationValue: userName ??
-                    'Loading...', // Display name or 'Loading...' if null
+              GestureDetector(
+                onTap: () {},
+                child: InformationSetting(
+                  informationType: 'Name',
+                  iconType: const Icon(Icons.person),
+                  informationValue: userName ??
+                      'Loading...', // Display name or 'Loading...' if null
+                ),
               ),
               const SizedBox(height: 20),
               InformationSetting(
@@ -112,11 +115,16 @@ class _SettingWidgetState extends State<SettingWidget> {
                     'Loading...', // Display email or 'Loading...' if null
               ),
               const SizedBox(height: 20),
-              InformationSetting(
-                informationType: 'Password',
-                iconType: const Icon(Icons.password),
-                informationValue: userPassword ??
-                    'Loading...', // Display password info or 'Loading...'
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, 'resetpassword');
+                },
+                child: InformationSetting(
+                  informationType: 'Password',
+                  iconType: const Icon(Icons.password),
+                  informationValue: userPassword ??
+                      'Loading...', // Display password info or 'Loading...'
+                ),
               ),
             ],
           ),
