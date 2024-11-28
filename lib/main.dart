@@ -10,6 +10,7 @@ import 'home_page.dart';
 import 'models/cart.dart';
 import './widgets/checkout.dart';
 import './widgets/settings_content/reset_password.dart';
+import 'ai_chatbot/test.dart';
 // Import the generated file
 
 void main() async {
@@ -60,6 +61,7 @@ class _MyAppState extends State<MyApp> {
         'homepage': (context) => HomePage(),
         'checkout': (context) => Checkout(),
         'resetpassword': (context) => ResetPassword(),
+        'chattest': (context) => GeminiChatBot(),
       },
     );
   }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'constns/home_constants.dart';
+import 'constns/color_text_size.dart';
+import 'ai_chatbot/test.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -55,10 +57,18 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
             currentIndex: _selectedIndex,
-            selectedItemColor: Colors.amber[800],
+            selectedItemColor: primary_color,
             onTap: _onItemTapped,
           ),
         ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: primary_color,
+          child: const Icon(Icons.help),
+          onPressed: () {
+            Navigator.of(context).pushNamed('chattest');
+          },
+        ),
+        //floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       ),
     );
   }
