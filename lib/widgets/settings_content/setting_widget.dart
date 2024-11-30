@@ -71,62 +71,65 @@ class _SettingWidgetState extends State<SettingWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(kToolbarHeight),
-        child: AppBarWidget(title: 'Settings'),
-      ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Image.asset('assets/images/7.png'),
-              const SizedBox(height: 20),
-              const NotificationSetting(),
-              const SizedBox(height: 20),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.9, // 90% width
-                child: Text(
-                  'Account information',
-                  style: TextStyle(
-                    color: text_color,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w900,
+    return Container(
+      padding: const EdgeInsets.only(top: 15),
+      child: Scaffold(
+        appBar: const PreferredSize(
+          preferredSize: Size.fromHeight(kToolbarHeight),
+          child: AppBarWidget(title: 'Settings'),
+        ),
+        body: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.asset('assets/images/7.png'),
+                const SizedBox(height: 20),
+                const NotificationSetting(),
+                const SizedBox(height: 20),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.9, // 90% width
+                  child: Text(
+                    'Account information',
+                    style: TextStyle(
+                      color: text_color,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w900,
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              GestureDetector(
-                onTap: () {},
-                child: InformationSetting(
-                  informationType: 'Name',
-                  iconType: const Icon(Icons.person),
-                  informationValue: userName ??
-                      'Loading...', // Display name or 'Loading...' if null
+                const SizedBox(height: 20),
+                GestureDetector(
+                  onTap: () {},
+                  child: InformationSetting(
+                    informationType: 'Name',
+                    iconType: const Icon(Icons.person),
+                    informationValue: userName ??
+                        'Loading...', // Display name or 'Loading...' if null
+                  ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              InformationSetting(
-                informationType: 'Email',
-                iconType: const Icon(Icons.email),
-                informationValue: userEmail ??
-                    'Loading...', // Display email or 'Loading...' if null
-              ),
-              const SizedBox(height: 20),
-              GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, 'resetpassword');
-                },
-                child: InformationSetting(
-                  informationType: 'Password',
-                  iconType: const Icon(Icons.password),
-                  informationValue: userPassword ??
-                      'Loading...', // Display password info or 'Loading...'
+                const SizedBox(height: 20),
+                InformationSetting(
+                  informationType: 'Email',
+                  iconType: const Icon(Icons.email),
+                  informationValue: userEmail ??
+                      'Loading...', // Display email or 'Loading...' if null
                 ),
-              ),
-            ],
+                const SizedBox(height: 20),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, 'resetpassword');
+                  },
+                  child: InformationSetting(
+                    informationType: 'Password',
+                    iconType: const Icon(Icons.password),
+                    informationValue: userPassword ??
+                        'Loading...', // Display password info or 'Loading...'
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

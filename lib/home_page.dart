@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'constns/home_constants.dart';
 import 'constns/color_text_size.dart';
-import 'ai_chatbot/test.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -27,45 +26,54 @@ class _HomePageState extends State<HomePage> {
           child: widgetOptions.elementAt(_selectedIndex),
         ),
         bottomNavigationBar: Container(
-          //padding: const EdgeInsets.only(top: 8.0),
-          decoration: const BoxDecoration(
-            color: Colors.grey, // Background color of the container
+          padding: const EdgeInsets.all(15),
+          decoration: BoxDecoration(
             border: Border(
               top: BorderSide(
-                color: Colors.grey, // Color of the top border
+                color: border_color, // Color of the top border
                 width: 1.0, // Thickness of the top border
               ),
             ),
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(12.0), // Radius for top-left corner
-              topRight: Radius.circular(12.0), // Radius for top-right corner
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(25.0), // Radius for top-left corner
+              topRight: Radius.circular(25.0), // Radius for top-right corner
             ),
           ),
-          child: BottomNavigationBar(
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(Icons.book),
-                label: 'Courses',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.person),
-                label: 'Profile',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
-                label: 'Settings',
-              ),
-            ],
-            currentIndex: _selectedIndex,
-            selectedItemColor: primary_color,
-            onTap: _onItemTapped,
+          child: ClipRRect(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(25.0), // Radius for top-left corner
+              topRight: Radius.circular(25.0), // Radius for top-right corner
+            ),
+            child: BottomNavigationBar(
+              items: const <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.book),
+                  label: 'Courses',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.person),
+                  label: 'Profile',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.settings),
+                  label: 'Settings',
+                ),
+              ],
+              currentIndex: _selectedIndex,
+              selectedItemColor: primary_color,
+              unselectedItemColor: border_color,
+              onTap: _onItemTapped,
+            ),
           ),
         ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: primary_color,
-          child: const Icon(Icons.help),
+          child: const Icon(
+            Icons.help,
+            color: Colors.white,
+          ),
           onPressed: () {
-            Navigator.of(context).pushNamed('chattest');
+            Navigator.of(context).pushNamed('chatbot');
           },
         ),
         //floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,

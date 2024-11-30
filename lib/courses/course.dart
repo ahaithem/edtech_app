@@ -90,7 +90,7 @@ class _CourseState extends State<Course> {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.9, // 90% width
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 20, top: 20),
+                padding: const EdgeInsets.only(bottom: 20, top: 15),
                 child: TextField(
                   controller: _searchController,
                   decoration: InputDecoration(
@@ -113,7 +113,7 @@ class _CourseState extends State<Course> {
                   itemCount: _filteredCourses.length,
                   itemBuilder: (context, index) {
                     return Container(
-                      padding: EdgeInsets.only(bottom: 15),
+                      padding: const EdgeInsets.only(bottom: 15),
                       child: _filteredCourses[index],
                     ); // Directly return the course
                   },

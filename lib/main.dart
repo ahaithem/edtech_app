@@ -10,7 +10,7 @@ import 'home_page.dart';
 import 'models/cart.dart';
 import './widgets/checkout.dart';
 import './widgets/settings_content/reset_password.dart';
-import 'ai_chatbot/test.dart';
+import 'ai_chatbot/chat_bot.dart';
 // Import the generated file
 
 void main() async {
@@ -55,13 +55,13 @@ class _MyAppState extends State<MyApp> {
       ),
       home: const FirstScreen(),
       routes: {
-        'learnanytime': (context) => LearnAnyTime(),
-        'login': (context) => LogIn(),
-        'signup': (context) => SignUp(),
-        'homepage': (context) => HomePage(),
+        'learnanytime': (context) => const LearnAnyTime(),
+        'login': (context) => const LogIn(),
+        'signup': (context) => const SignUp(),
+        'homepage': (context) => const HomePage(),
         'checkout': (context) => Checkout(),
-        'resetpassword': (context) => ResetPassword(),
-        'chattest': (context) => GeminiChatBot(),
+        'resetpassword': (context) => const ResetPassword(),
+        'chatbot': (context) => const GeminiChatBot(),
       },
     );
   }

@@ -13,51 +13,54 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(kToolbarHeight),
-        child: AppBarWidget(title: 'Profile'),
-      ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(height: 16.0), // Spacing between containers
-              ProfileContent(
-                title: 'Your Courses',
-                onTap: () {
-                  // Your onTap logic here
-                  Navigator.pushNamed(context, 'checkout');
-                },
-              ),
-              const SizedBox(height: 16.0), // Spacing between containers
-              ProfileContent(
-                title: 'Saved',
-                onTap: () {
-                  // Your onTap logic here
-                },
-              ),
-
-              const SizedBox(height: 16.0), // Spacing between containers
-              ProfileContent(
-                title: 'Payment',
-                onTap: () {
-                  // Your onTap logic here
-                },
-              ),
-              const SizedBox(height: 16.0), // Spacing between containers
-              InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Text(
-                  'Logout',
-                  style: TextStyle(color: subtitle_color, fontSize: 14),
+    return Container(
+      padding: const EdgeInsets.only(top: 15.0),
+      child: Scaffold(
+        appBar: const PreferredSize(
+          preferredSize: Size.fromHeight(kToolbarHeight),
+          child: AppBarWidget(title: 'Profile'),
+        ),
+        body: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(height: 16.0), // Spacing between containers
+                ProfileContent(
+                  title: 'Your Courses',
+                  onTap: () {
+                    // Your onTap logic here
+                    Navigator.pushNamed(context, 'checkout');
+                  },
                 ),
-              )
-            ],
+                const SizedBox(height: 16.0), // Spacing between containers
+                ProfileContent(
+                  title: 'Saved',
+                  onTap: () {
+                    // Your onTap logic here
+                  },
+                ),
+
+                const SizedBox(height: 16.0), // Spacing between containers
+                ProfileContent(
+                  title: 'Payment',
+                  onTap: () {
+                    // Your onTap logic here
+                  },
+                ),
+                const SizedBox(height: 16.0), // Spacing between containers
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    'Logout',
+                    style: TextStyle(color: subtitle_color, fontSize: 14),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
