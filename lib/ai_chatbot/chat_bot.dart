@@ -43,7 +43,6 @@ class _GeminiChatBotState extends State<GeminiChatBot> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        //backgroundColor: secondary_color,
         appBar: const PreferredSize(
           preferredSize: Size.fromHeight(kToolbarHeight),
           child: AppBarWidget(title: 'ChatBot'),

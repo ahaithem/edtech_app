@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'video.dart';
 import 'youtube_service.dart';
 import 'video_player_screen.dart';
+import '../widgets/app_bar.dart';
 
 // This screen displays a list of videos from a YouTube playlist
 class VideoListScreen extends StatefulWidget {
@@ -32,7 +33,10 @@ class _VideoListScreenState extends State<VideoListScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(title: Text('Course Videos')),
+        appBar: const PreferredSize(
+          preferredSize: Size.fromHeight(kToolbarHeight),
+          child: AppBarWidget(title: 'Course Videos'),
+        ),
         body: FutureBuilder<List<Video>>(
           future: _videosFuture,
           builder: (context, snapshot) {

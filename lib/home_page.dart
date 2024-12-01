@@ -76,7 +76,6 @@ class _HomePageState extends State<HomePage> {
             Navigator.of(context).pushNamed('chatbot');
           },
         ),
-        //floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       ),
     );
   }

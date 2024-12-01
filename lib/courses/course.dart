@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'api_key_google_console.dart';
 import 'course_type.dart';
 import '../constns/color_text_size.dart';
+import '../widgets/category.dart';
 
 class Course extends StatefulWidget {
   const Course({super.key});
@@ -29,7 +30,7 @@ class _CourseState extends State<Course> {
         coursePrice: '50',
         coursePlaylistId: 'PLIhvC56v63ILPDA2DQBv0IKzqsWTZxCkp'),
     const CourseType(
-        courseTitle: 'Figma UX Design UI Essentials',
+        courseTitle: 'UI & UX Essentials',
         courseDuration: '2 h 30 min',
         courseDescription: 'UI/UX Essentials',
         courseImageUrl: 'assets/images/9.png',
@@ -90,7 +91,8 @@ class _CourseState extends State<Course> {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.9, // 90% width
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 20, top: 15),
+                //padding: const EdgeInsets.only(bottom: 20, top: 15),
+                padding: const EdgeInsets.only(top: 15),
                 child: TextField(
                   controller: _searchController,
                   decoration: InputDecoration(
@@ -105,6 +107,12 @@ class _CourseState extends State<Course> {
                 ),
               ),
             ),
+            SizedBox(
+                width: MediaQuery.of(context).size.width * 0.9, // 90% width
+                child: const Padding(
+                  padding: EdgeInsets.only(top: 15),
+                  child: CarouselExample(),
+                )),
             Expanded(
               child: SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9, // 90% width
@@ -113,7 +121,7 @@ class _CourseState extends State<Course> {
                   itemCount: _filteredCourses.length,
                   itemBuilder: (context, index) {
                     return Container(
-                      padding: const EdgeInsets.only(bottom: 15),
+                      padding: const EdgeInsets.only(top: 15),
                       child: _filteredCourses[index],
                     ); // Directly return the course
                   },
