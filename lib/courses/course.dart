@@ -3,6 +3,7 @@ import 'api_key_google_console.dart';
 import 'course_type.dart';
 import '../constns/color_text_size.dart';
 import '../widgets/category.dart';
+import 'all_courses.dart';
 
 class Course extends StatefulWidget {
   const Course({super.key});
@@ -12,73 +13,55 @@ class Course extends StatefulWidget {
 }
 
 class _CourseState extends State<Course> {
+  // API key for accessing Google services
   final String apiKey = API_KEY;
+
+  // Controller for the search text field
   final TextEditingController _searchController = TextEditingController();
-  final List<CourseType> _courses = [
-    const CourseType(
-        courseTitle: 'Flutter',
-        courseDuration: '3 h 30 min',
-        courseDescription: 'Advanced Flutter course',
-        courseImageUrl: 'assets/images/13.png',
-        coursePrice: '50',
-        coursePlaylistId: 'PL93xoMrxRJIviJiC76oO5aV8bDp2s3OrA'),
-    const CourseType(
-        courseTitle: 'Python',
-        courseDuration: '33 h 30 min',
-        courseDescription: 'Beginner Python course',
-        courseImageUrl: 'assets/images/8.png',
-        coursePrice: '50',
-        coursePlaylistId: 'PLIhvC56v63ILPDA2DQBv0IKzqsWTZxCkp'),
-    const CourseType(
-        courseTitle: 'UI & UX Essentials',
-        courseDuration: '2 h 30 min',
-        courseDescription: 'UI/UX Essentials',
-        courseImageUrl: 'assets/images/9.png',
-        coursePrice: '50',
-        coursePlaylistId: 'PL0lNJEnwfVVOQ8qKmLoT7tLdTDKhEDzmG'),
-    const CourseType(
-        courseTitle: 'UI & UX',
-        courseDuration: '2 h',
-        courseDescription: 'Learn UI & UX for beginners',
-        courseImageUrl: 'assets/images/10.png',
-        coursePrice: '50',
-        coursePlaylistId: 'PLmQ0KfqeaHAuud_Aav-94nfToArf6Uh4K'),
-    const CourseType(
-        courseTitle: 'HTML',
-        courseDuration: '4 h',
-        courseDescription: 'Learn HTML from scratch',
-        courseImageUrl: 'assets/images/11.png',
-        coursePrice: '50',
-        coursePlaylistId: 'PLDoPjvoNmBAw_t_XWUFbBX-c9MafPk9ji'),
-    const CourseType(
-        courseTitle: 'CSS tutorials',
-        courseDuration: '12 h',
-        courseDescription: 'Learn CSS for beginners',
-        courseImageUrl: 'assets/images/13.png',
-        coursePrice: '50',
-        coursePlaylistId: 'PL0Zuz27SZ-6Mx9fd9elt80G1bPcySmWit'),
-  ];
+
+  // List to hold the filtered courses
   List<CourseType> _filteredCourses = [];
 
   @override
   void initState() {
     super.initState();
-    _filteredCourses = _courses;
+    // Initialize the filtered courses with all courses
+    _filteredCourses = courses;
+    // Add a listener to the search controller to filter courses as the user types
     _searchController.addListener(_filterCourses);
   }
 
   @override
   void dispose() {
+    // Dispose the search controller when the widget is disposed
     _searchController.dispose();
     super.dispose();
   }
 
+  // Method to filter courses based on the search query
   void _filterCourses() {
     final query = _searchController.text.toLowerCase();
     setState(() {
-      _filteredCourses = _courses.where((course) {
+      _filteredCourses = courses.where((course) {
         return course.courseTitle.toLowerCase().contains(query);
       }).toList();
+    });
+  }
+
+  // Method to filter courses based on the selected category
+  void _filterCoursesByCategory(String category) {
+    setState(() {
+      if (category == '#ALL') {
+        // If the category is '#ALL', show all courses
+        _filteredCourses = courses;
+      } else {
+        // Otherwise, filter courses by the selected category
+        _filteredCourses = courses.where((course) {
+          return course.courseTitle.toLowerCase().contains(
+                category.substring(1).toLowerCase(),
+              );
+        }).toList();
+      }
     });
   }
 
@@ -88,10 +71,10 @@ class _CourseState extends State<Course> {
       body: Center(
         child: Column(
           children: [
+            // Search text field
             SizedBox(
-              width: MediaQuery.of(context).size.width * 0.9, // 90% width
+              width: MediaQuery.of(context).size.width * 0.9,
               child: Padding(
-                //padding: const EdgeInsets.only(bottom: 20, top: 15),
                 padding: const EdgeInsets.only(top: 15),
                 child: TextField(
                   controller: _searchController,
@@ -107,23 +90,27 @@ class _CourseState extends State<Course> {
                 ),
               ),
             ),
+            // Category carousel
             SizedBox(
-                width: MediaQuery.of(context).size.width * 0.9, // 90% width
-                child: const Padding(
-                  padding: EdgeInsets.only(top: 15, bottom: 10),
-                  child: CarouselExample(),
-                )),
+              width: MediaQuery.of(context).size.width * 0.9,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 15),
+                child: CarouselExample(
+                  onCategorySelected: _filterCoursesByCategory,
+                ),
+              ),
+            ),
+            // List of filtered courses
             Expanded(
               child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.9, // 90% width
+                width: MediaQuery.of(context).size.width * 0.9,
                 child: ListView.builder(
-                  //padding: const EdgeInsets.symmetric(horizontal: 16),
                   itemCount: _filteredCourses.length,
                   itemBuilder: (context, index) {
                     return Container(
                       padding: const EdgeInsets.only(top: 15),
                       child: _filteredCourses[index],
-                    ); // Directly return the course
+                    );
                   },
                 ),
               ),

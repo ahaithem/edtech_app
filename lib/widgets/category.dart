@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import '../constns/color_text_size.dart';
 
 class CarouselExample extends StatefulWidget {
-  const CarouselExample({super.key});
+  final Function(String) onCategorySelected; // Callback for category selection
+
+  const CarouselExample({super.key, required this.onCategorySelected});
 
   @override
   State<CarouselExample> createState() => _CarouselExampleState();
@@ -10,6 +12,7 @@ class CarouselExample extends StatefulWidget {
 
 class _CarouselExampleState extends State<CarouselExample> {
   final List<String> items = [
+    '#ALL',
     '#CSS',
     '#UX',
     '#Flutter',
@@ -34,6 +37,8 @@ class _CarouselExampleState extends State<CarouselExample> {
     '#React Native',
   ];
 
+  String selectedCategory = '#ALL'; // Track the selected category
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -43,49 +48,41 @@ class _CarouselExampleState extends State<CarouselExample> {
           scrollDirection: Axis.horizontal,
           itemCount: items.length,
           itemBuilder: (context, index) {
+            final category = items[index];
+            final isSelected = category == selectedCategory;
+
             return Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 8.0), // Spacing between items
-              child: UncontainedLayoutCard(
-                label: items[index],
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    selectedCategory = category;
+                  });
+                  widget.onCategorySelected(category); // Notify parent widget
+                },
+                child: Center(
+                  child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                    decoration: BoxDecoration(
+                      color: isSelected ? warning_color : secondary_color,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Text(
+                      category,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      overflow: TextOverflow.clip,
+                      softWrap: false,
+                    ),
+                  ),
+                ),
               ),
             );
           },
-        ),
-      ),
-    );
-  }
-}
-
-class UncontainedLayoutCard extends StatelessWidget {
-  const UncontainedLayoutCard({
-    super.key,
-    required this.label,
-  });
-
-  final String label;
-
-  @override
-  Widget build(BuildContext context) {
-    TextStyle textStyle = const TextStyle(
-      color: Colors.white,
-      fontSize: 16,
-      fontWeight: FontWeight.bold,
-    );
-
-    return Center(
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-        decoration: BoxDecoration(
-          color: secondary_color,
-          borderRadius:
-              BorderRadius.circular(20), // Rounded corners for better UI
-        ),
-        child: Text(
-          label,
-          style: textStyle,
-          overflow: TextOverflow.clip,
-          softWrap: false,
         ),
       ),
     );
