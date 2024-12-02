@@ -9,7 +9,7 @@ class CarouselExample extends StatefulWidget {
 }
 
 class _CarouselExampleState extends State<CarouselExample> {
-  List<String> items = [
+  final List<String> items = [
     '#CSS',
     '#UX',
     '#Flutter',
@@ -33,18 +33,24 @@ class _CarouselExampleState extends State<CarouselExample> {
     '#Vue JS',
     '#React Native',
   ];
+
   @override
   Widget build(BuildContext context) {
     return Center(
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxHeight: 50),
-        child: CarouselView(
-          itemExtent: 150,
-          shrinkExtent: 100,
-          children: items.map((String item) {
-            return UncontainedLayoutCard(
-                index: items.indexOf(item), label: item);
-          }).toList(),
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: items.length,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 8.0), // Spacing between items
+              child: UncontainedLayoutCard(
+                label: items[index],
+              ),
+            );
+          },
         ),
       ),
     );
@@ -54,21 +60,30 @@ class _CarouselExampleState extends State<CarouselExample> {
 class UncontainedLayoutCard extends StatelessWidget {
   const UncontainedLayoutCard({
     super.key,
-    required this.index,
     required this.label,
   });
 
-  final int index;
   final String label;
 
   @override
   Widget build(BuildContext context) {
-    return ColoredBox(
-      color: secondary_color,
-      child: Center(
+    TextStyle textStyle = const TextStyle(
+      color: Colors.white,
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+    );
+
+    return Center(
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+        decoration: BoxDecoration(
+          color: secondary_color,
+          borderRadius:
+              BorderRadius.circular(20), // Rounded corners for better UI
+        ),
         child: Text(
           label,
-          style: const TextStyle(color: Colors.white, fontSize: 20),
+          style: textStyle,
           overflow: TextOverflow.clip,
           softWrap: false,
         ),

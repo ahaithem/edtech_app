@@ -110,7 +110,7 @@ class _CourseState extends State<Course> {
             SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9, // 90% width
                 child: const Padding(
-                  padding: EdgeInsets.only(top: 15),
+                  padding: EdgeInsets.only(top: 15, bottom: 10),
                   child: CarouselExample(),
                 )),
             Expanded(
