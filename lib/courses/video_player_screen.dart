@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:edtech_app/widgets/app_bar.dart';
 
 // This screen displays a YouTube video player
 class VideoPlayerScreen extends StatefulWidget {
@@ -22,7 +23,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     // Initialize the YouTube player controller with the video ID and settings
     _controller = YoutubePlayerController(
       initialVideoId: widget.videoId, // Set the initial video ID
-      flags: YoutubePlayerFlags(
+      flags: const YoutubePlayerFlags(
         autoPlay: true, // Automatically play the video when the player loads
         mute: false, // Do not mute the video
       ),
@@ -40,7 +41,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar:
-          AppBar(title: Text(widget.videoTitle)), // App bar with video title
+          AppBar(title: Text(widget.videoTitle)), // App bar with video title,
+
       body: YoutubePlayer(
         controller: _controller, // The controller for the YouTube player
         showVideoProgressIndicator: true, // Show the video progress indicator

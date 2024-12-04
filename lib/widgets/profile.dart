@@ -1,3 +1,5 @@
+import 'package:edtech_app/screens/log_in.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import './profile_content.dart';
 import '../constns/color_text_size.dart';
@@ -16,10 +18,10 @@ class _ProfileState extends State<Profile> {
     return Container(
       padding: const EdgeInsets.only(top: 15.0),
       child: Scaffold(
-        appBar: const PreferredSize(
-          preferredSize: Size.fromHeight(kToolbarHeight),
-          child: AppBarWidget(title: 'Profile'),
-        ),
+        // appBar: const PreferredSize(
+        //   preferredSize: Size.fromHeight(kToolbarHeight),
+        //   child: AppBarWidget(title: 'Profile'),
+        // ),
         body: Center(
           child: SingleChildScrollView(
             child: Column(
@@ -52,7 +54,9 @@ class _ProfileState extends State<Profile> {
                 const SizedBox(height: 16.0), // Spacing between containers
                 InkWell(
                   onTap: () {
-                    Navigator.pop(context);
+                    FirebaseAuth.instance.signOut();
+                    Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => const LogIn()));
                   },
                   child: Text(
                     'Logout',

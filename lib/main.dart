@@ -34,26 +34,16 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // This widget is the root of your application.
   @override
-  void initState() {
-    FirebaseAuth.instance.authStateChanges().listen((User? user) {
-      if (user == null) {
-        print('=============================User is currently signed out!');
-      } else {
-        print('=============================User is signed in!');
-      }
-    });
-    super.initState();
-  }
-
   Widget build(BuildContext context) {
+    final isLoggedIn = FirebaseAuth.instance.currentUser != null;
+
     return MaterialApp(
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const FirstScreen(),
+      home: isLoggedIn ? const HomePage() : const FirstScreen(),
       routes: {
         'learnanytime': (context) => const LearnAnyTime(),
         'login': (context) => const LogIn(),

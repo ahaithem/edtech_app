@@ -25,44 +25,47 @@ class _HomePageState extends State<HomePage> {
         body: Center(
           child: widgetOptions.elementAt(_selectedIndex),
         ),
-        bottomNavigationBar: Container(
-          padding: const EdgeInsets.all(15),
-          decoration: BoxDecoration(
-            border: Border(
-              top: BorderSide(
-                color: border_color, // Color of the top border
-                width: 1.0, // Thickness of the top border
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.only(top: 15),
+          child: Container(
+            padding: const EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              border: Border(
+                top: BorderSide(
+                  color: border_color, // Color of the top border
+                  width: 1.0, // Thickness of the top border
+                ),
+              ),
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(25.0), // Radius for top-left corner
+                topRight: Radius.circular(25.0), // Radius for top-right corner
               ),
             ),
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(25.0), // Radius for top-left corner
-              topRight: Radius.circular(25.0), // Radius for top-right corner
-            ),
-          ),
-          child: ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(25.0), // Radius for top-left corner
-              topRight: Radius.circular(25.0), // Radius for top-right corner
-            ),
-            child: BottomNavigationBar(
-              items: const <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.book),
-                  label: 'Courses',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.person),
-                  label: 'Profile',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.settings),
-                  label: 'Settings',
-                ),
-              ],
-              currentIndex: _selectedIndex,
-              selectedItemColor: primary_color,
-              unselectedItemColor: border_color,
-              onTap: _onItemTapped,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(25.0), // Radius for top-left corner
+                topRight: Radius.circular(25.0), // Radius for top-right corner
+              ),
+              child: BottomNavigationBar(
+                items: const <BottomNavigationBarItem>[
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.book),
+                    label: 'Courses',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.person),
+                    label: 'Profile',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.settings),
+                    label: 'Settings',
+                  ),
+                ],
+                currentIndex: _selectedIndex,
+                selectedItemColor: primary_color,
+                unselectedItemColor: border_color,
+                onTap: _onItemTapped,
+              ),
             ),
           ),
         ),

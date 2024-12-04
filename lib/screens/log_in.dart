@@ -1,9 +1,11 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:edtech_app/screens/sign_up.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../constns/color_text_size.dart';
 import '../widgets/text_form_field.dart';
 import '../widgets/log_button.dart';
+import '../home_page.dart';
 
 class LogIn extends StatefulWidget {
   const LogIn({super.key});
@@ -171,7 +173,10 @@ class _LogInState extends State<LogIn> {
                                     'Login successful: ${credential.user?.email}');
                                 //To check if the email that was entered by the user when he sign up is is verified and if not he can't go to the homepage
                                 if (credential.user!.emailVerified) {
-                                  Navigator.of(context).pushNamed('homepage');
+                                  Navigator.of(context)
+                                      .pushReplacement(MaterialPageRoute(
+                                    builder: (context) => const HomePage(),
+                                  ));
                                 } else {
                                   // Handle other types of errors (e.g., network error)
                                   FirebaseAuth.instance.currentUser!
@@ -227,7 +232,10 @@ class _LogInState extends State<LogIn> {
                         const SizedBox(height: 10),
                         InkWell(
                           onTap: () {
-                            Navigator.of(context).pushNamed('signup');
+                            Navigator.of(context)
+                                .pushReplacement(MaterialPageRoute(
+                              builder: (context) => const SignUp(),
+                            ));
                           },
                           child: Text(
                             'Sign up',

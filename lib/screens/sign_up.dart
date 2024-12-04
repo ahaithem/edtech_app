@@ -145,7 +145,7 @@ class _SignUpState extends State<SignUp> {
                   const SizedBox(height: 10),
                   InkWell(
                     onTap: () {
-                      Navigator.of(context).pushNamed('login');
+                      Navigator.of(context).pushReplacementNamed('login');
                     },
                     child: Text(
                       'Log in',

@@ -74,10 +74,10 @@ class _SettingWidgetState extends State<SettingWidget> {
     return Container(
       padding: const EdgeInsets.only(top: 15),
       child: Scaffold(
-        appBar: const PreferredSize(
-          preferredSize: Size.fromHeight(kToolbarHeight),
-          child: AppBarWidget(title: 'Settings'),
-        ),
+        // appBar: const PreferredSize(
+        //   preferredSize: Size.fromHeight(kToolbarHeight),
+        //   child: AppBarWidget(title: 'Settings'),
+        // ),
         body: Center(
           child: SingleChildScrollView(
             child: Column(
@@ -119,7 +119,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                 const SizedBox(height: 20),
                 GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, 'resetpassword');
+                    Navigator.pushReplacementNamed(context, 'resetpassword');
                   },
                   child: InformationSetting(
                     informationType: 'Password',

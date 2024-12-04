@@ -52,7 +52,7 @@ class _CarouselExampleState extends State<CarouselExample> {
             final isSelected = category == selectedCategory;
 
             return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 5.0),
               child: GestureDetector(
                 onTap: () {
                   setState(() {

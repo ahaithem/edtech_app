@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:card_swiper/card_swiper.dart';
 import '../widgets/swiper_widget.dart';
 import '../constns/color_text_size.dart';
+import '../screens/log_in.dart';
 
 class LearnAnyTime extends StatelessWidget {
   const LearnAnyTime({super.key});
@@ -79,7 +80,8 @@ class LearnAnyTime extends StatelessWidget {
                   //minWidth: double.infinity, // Width of the button
                   height: 56, // Height of the button
                   onPressed: () {
-                    Navigator.of(context).pushNamed('login');
+                    Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => const LogIn()));
                   },
                   child: const Text(
                     'Next',

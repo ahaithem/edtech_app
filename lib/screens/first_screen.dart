@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'learn_any_time.dart';
 
 class FirstScreen extends StatelessWidget {
   const FirstScreen({super.key});
@@ -9,7 +10,9 @@ class FirstScreen extends StatelessWidget {
       child: Scaffold(
         body: GestureDetector(
           onTap: () {
-            Navigator.of(context).pushNamed('learnanytime');
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (context) => const LearnAnyTime(),
+            ));
           },
           child: Center(
             child: Column(

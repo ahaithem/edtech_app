@@ -81,8 +81,8 @@ class _CourseState extends State<Course> {
                   decoration: InputDecoration(
                     labelText: 'Search course',
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(color: border_color),
-                    ),
+                        borderSide: BorderSide(color: border_color),
+                        borderRadius: BorderRadius.circular(16)),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: warning_color),
                     ),
@@ -92,7 +92,7 @@ class _CourseState extends State<Course> {
             ),
             // Category carousel
             SizedBox(
-              width: MediaQuery.of(context).size.width * 0.9,
+              width: MediaQuery.of(context).size.width,
               child: Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: CarouselExample(

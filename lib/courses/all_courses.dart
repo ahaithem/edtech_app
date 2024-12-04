@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-import 'api_key_google_console.dart';
 import 'course_type.dart';
-import '../constns/color_text_size.dart';
-import '../widgets/category.dart';
 
 final List<CourseType> courses = [
   const CourseType(

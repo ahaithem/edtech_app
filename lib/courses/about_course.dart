@@ -183,7 +183,6 @@ class AboutCourse extends StatelessWidget {
                       ),
                     );
                   },
-
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
