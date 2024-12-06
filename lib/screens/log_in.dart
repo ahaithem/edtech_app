@@ -21,15 +21,20 @@ class _LogInState extends State<LogIn> {
   bool isLoading = false;
 
   @override
+  void dispose() {
+    email.dispose();
+    password.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         body: isLoading
             ? Center(
                 child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(
-                    primary_color), // Set the color of the progress indicator
-                // Your CircularProgressIndicator properties here
+                valueColor: AlwaysStoppedAnimation<Color>(primary_color),
               ))
             : Center(
                 child: SingleChildScrollView(
@@ -87,29 +92,40 @@ class _LogInState extends State<LogIn> {
                           ],
                         ),
                         const SizedBox(height: 10),
-                        CostomTextForm(
-                          hintText: 'Email',
-                          mycontroller: email,
-                          validator: (value) {
-                            if (value == '') {
-                              return 'Cannot be empty';
-                            }
-                          },
-                        ),
-                        const SizedBox(height: 10),
-                        CostomTextForm(
-                          hintText: 'Password',
-                          mycontroller: password,
-                          validator: (value) {
-                            if (value == '') {
-                              return 'Cannot be empty';
-                            }
-                          },
+                        AutofillGroup(
+                          child: Column(
+                            children: [
+                              CostomTextForm(
+                                hintText: 'Email',
+                                mycontroller: email,
+                                keyboardType: TextInputType.emailAddress,
+                                autofillHints: [AutofillHints.email],
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Email cannot be empty';
+                                  }
+                                  return null;
+                                },
+                              ),
+                              const SizedBox(height: 10),
+                              CostomTextForm(
+                                hintText: 'Password',
+                                mycontroller: password,
+                                keyboardType: TextInputType.visiblePassword,
+                                autofillHints: [AutofillHints.password],
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Password cannot be empty';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                         const SizedBox(height: 10),
                         InkWell(
                           onTap: () async {
-                            //To verify that the email dosn't empty so we can send email verification
                             if (email.text == '') {
                               AwesomeDialog(
                                 context: context,
@@ -117,35 +133,32 @@ class _LogInState extends State<LogIn> {
                                 animType: AnimType.rightSlide,
                                 title: 'Email Empty',
                                 desc: 'Please Enter your email',
-                                btnOkOnPress: () {}, // Action for OK button
+                                btnOkOnPress: () {},
                               ).show();
                               return;
                             }
                             try {
-                              //To send email verification so the user can reset his password
                               await FirebaseAuth.instance
                                   .sendPasswordResetEmail(email: email.text);
                               AwesomeDialog(
-                                // ignore: use_build_context_synchronously
                                 context: context,
                                 dialogType: DialogType.success,
                                 animType: AnimType.rightSlide,
                                 title: 'Check Your Email',
                                 desc:
                                     'please check your email and click on the verification link to reset your password',
-                                btnOkOnPress: () {}, // Action for OK button
+                                btnOkOnPress: () {},
                               ).show();
                             } catch (e) {
                               print(e);
                               AwesomeDialog(
-                                // ignore: use_build_context_synchronously
                                 context: context,
                                 dialogType: DialogType.warning,
                                 animType: AnimType.rightSlide,
                                 title: 'No existing Email',
                                 desc:
                                     'please check the email that you have entred and repeat again',
-                                btnOkOnPress: () {}, // Action for OK button
+                                btnOkOnPress: () {},
                               ).show();
                             }
                           },
@@ -171,14 +184,12 @@ class _LogInState extends State<LogIn> {
                                 setState(() {});
                                 print(
                                     'Login successful: ${credential.user?.email}');
-                                //To check if the email that was entered by the user when he sign up is is verified and if not he can't go to the homepage
                                 if (credential.user!.emailVerified) {
                                   Navigator.of(context)
                                       .pushReplacement(MaterialPageRoute(
                                     builder: (context) => const HomePage(),
                                   ));
                                 } else {
-                                  // Handle other types of errors (e.g., network error)
                                   FirebaseAuth.instance.currentUser!
                                       .sendEmailVerification();
                                   AwesomeDialog(
@@ -188,17 +199,14 @@ class _LogInState extends State<LogIn> {
                                     title: 'Login Failed',
                                     desc:
                                         'please check your email and click on the verification link',
-                                    btnOkOnPress: () {}, // Action for OK button
+                                    btnOkOnPress: () {},
                                   ).show();
                                 }
                               } on FirebaseAuthException catch (e) {
                                 isLoading = true;
                                 setState(() {});
                                 print('Error code: ${e.code}');
-
-                                // Handle specific errors
                                 if (e.code == 'invalid-credential') {
-                                  // Show a more generic message as this is used for both invalid email and wrong password
                                   AwesomeDialog(
                                     context: context,
                                     dialogType: DialogType.error,
@@ -206,11 +214,10 @@ class _LogInState extends State<LogIn> {
                                     title: 'Login Failed',
                                     desc:
                                         'Invalid email or wrong password. Please check your credentials and try again.',
-                                    btnOkOnPress: () {}, // Action for OK button
+                                    btnOkOnPress: () {},
                                   ).show();
                                   isLoading = false;
                                 } else {
-                                  // Handle other types of errors (e.g., network error)
                                   AwesomeDialog(
                                     context: context,
                                     dialogType: DialogType.error,
@@ -218,7 +225,7 @@ class _LogInState extends State<LogIn> {
                                     title: 'Login Failed',
                                     desc:
                                         'An unknown error occurred. Please try again.',
-                                    btnOkOnPress: () {}, // Action for OK button
+                                    btnOkOnPress: () {},
                                   ).show();
                                   isLoading = false;
                                 }
