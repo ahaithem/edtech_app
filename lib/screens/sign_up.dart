@@ -29,10 +29,10 @@ class _SignUpState extends State<SignUp> {
         // The PreferredSize widget is used to set the preferred size of the app bar.
         // Here, it is used to ensure that the custom AppBarWidget has the same height
         // as the standard AppBar, which is defined by kToolbarHeight.
-        appBar: const PreferredSize(
-          preferredSize: Size.fromHeight(kToolbarHeight),
-          child: AppBarWidget(title: ''),
-        ),
+        // appBar: const PreferredSize(
+        //   preferredSize: Size.fromHeight(kToolbarHeight),
+        //   child: AppBarWidget(title: ''),
+        // ),
         body: Center(
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(20),
@@ -126,7 +126,7 @@ class _SignUpState extends State<SignUp> {
                                 animType: AnimType.rightSlide,
                                 title: 'Weak Password',
                                 desc: 'The password provided is too weak.',
-                              )..show();
+                              ).show();
                             } else if (e.code == 'email-already-in-use') {
                               AwesomeDialog(
                                 context: context,
@@ -135,7 +135,7 @@ class _SignUpState extends State<SignUp> {
                                 title: 'Email In Use',
                                 desc:
                                     'The account already exists for that email.',
-                              )..show();
+                              ).show();
                             }
                           } catch (e) {
                             print(e);
