@@ -99,7 +99,7 @@ class _LogInState extends State<LogIn> {
                                 hintText: 'Email',
                                 mycontroller: email,
                                 keyboardType: TextInputType.emailAddress,
-                                autofillHints: [AutofillHints.email],
+                                autofillHints: const [AutofillHints.email],
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Email cannot be empty';
@@ -112,7 +112,7 @@ class _LogInState extends State<LogIn> {
                                 hintText: 'Password',
                                 mycontroller: password,
                                 keyboardType: TextInputType.visiblePassword,
-                                autofillHints: [AutofillHints.password],
+                                autofillHints: const [AutofillHints.password],
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Password cannot be empty';
@@ -150,7 +150,7 @@ class _LogInState extends State<LogIn> {
                                 btnOkOnPress: () {},
                               ).show();
                             } catch (e) {
-                              print(e);
+                              //print(e);
                               AwesomeDialog(
                                 context: context,
                                 dialogType: DialogType.warning,
@@ -182,8 +182,8 @@ class _LogInState extends State<LogIn> {
                                         password: password.text);
                                 isLoading = false;
                                 setState(() {});
-                                print(
-                                    'Login successful: ${credential.user?.email}');
+                                //print(
+                                //  'Login successful: ${credential.user?.email}');
                                 if (credential.user!.emailVerified) {
                                   Navigator.of(context)
                                       .pushReplacement(MaterialPageRoute(
@@ -205,7 +205,7 @@ class _LogInState extends State<LogIn> {
                               } on FirebaseAuthException catch (e) {
                                 isLoading = true;
                                 setState(() {});
-                                print('Error code: ${e.code}');
+                                //print('Error code: ${e.code}');
                                 if (e.code == 'invalid-credential') {
                                   AwesomeDialog(
                                     context: context,
@@ -230,8 +230,8 @@ class _LogInState extends State<LogIn> {
                                   isLoading = false;
                                 }
                               } catch (e) {
-                                print('Error: $e');
-                                print(e);
+                                //print('Error: $e');
+                                // print(e);
                               }
                             }
                           },

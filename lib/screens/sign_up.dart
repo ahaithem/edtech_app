@@ -1,4 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:edtech_app/screens/log_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../constns/color_text_size.dart';
@@ -98,7 +99,7 @@ class _SignUpState extends State<SignUp> {
                       onPressed: () async {
                         if (formState.currentState!.validate()) {
                           try {
-                            final credential = await FirebaseAuth.instance
+                            await FirebaseAuth.instance
                                 .createUserWithEmailAndPassword(
                               email: email.text,
                               password: password.text,
@@ -114,10 +115,12 @@ class _SignUpState extends State<SignUp> {
                               'email': email.text,
                               'password': password.text,
                             });
-                            print("User Added");
+                            //print("User Added");
 
                             Navigator.of(context)
-                                .pop(); // Go back to login page
+                                .pushReplacement(MaterialPageRoute(
+                              builder: (context) => const LogIn(),
+                            )); // Go back to login page
                           } on FirebaseAuthException catch (e) {
                             if (e.code == 'weak-password') {
                               AwesomeDialog(
@@ -145,7 +148,9 @@ class _SignUpState extends State<SignUp> {
                   const SizedBox(height: 10),
                   InkWell(
                     onTap: () {
-                      Navigator.of(context).pushReplacementNamed('login');
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => const LogIn(),
+                      ));
                     },
                     child: Text(
                       'Log in',
