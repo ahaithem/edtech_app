@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-import 'package:edtech_app/widgets/app_bar.dart';
 
 // This screen displays a YouTube video player
 class VideoPlayerScreen extends StatefulWidget {
@@ -8,7 +7,8 @@ class VideoPlayerScreen extends StatefulWidget {
   final String videoTitle; // The title of the YouTube video
 
   // Constructor to initialize the videoId and videoTitle
-  VideoPlayerScreen({required this.videoId, required this.videoTitle});
+  const VideoPlayerScreen(
+      {super.key, required this.videoId, required this.videoTitle});
 
   @override
   _VideoPlayerScreenState createState() => _VideoPlayerScreenState();

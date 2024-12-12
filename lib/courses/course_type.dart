@@ -23,16 +23,6 @@ class CourseType extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Navigate to VideoListScreen with playlistId and apiKey
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) => VideoListScreen(
-        //       playlistId: coursePlaylistId,
-        //       apiKey: API_KEY,
-        //     ),
-        //   ),
-        // );
         Navigator.push(
             context,
             MaterialPageRoute(
@@ -52,7 +42,7 @@ class CourseType extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border.all(
               color: border_color, // Color of the border
-              width: 2.0, // Thickness of the border
+              width: 1.0, // Thickness of the border
             ),
             borderRadius: BorderRadius.circular(12.0), // Rounded corners
           ),
