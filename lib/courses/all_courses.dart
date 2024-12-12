@@ -43,4 +43,18 @@ final List<CourseType> courses = [
       courseImageUrl: 'assets/images/13.png',
       coursePrice: '50',
       coursePlaylistId: 'PL0Zuz27SZ-6Mx9fd9elt80G1bPcySmWit'),
+  const CourseType(
+      courseTitle: 'Dart',
+      courseDuration: '3 h',
+      courseDescription: 'Learn Dart for beginners',
+      courseImageUrl: 'assets/images/8.png',
+      coursePrice: '50',
+      coursePlaylistId: 'PL4cUxeGkcC9iVGY3ppchN9kIauln8IiEh'),
+  const CourseType(
+      courseTitle: 'Dart Crash course',
+      courseDuration: '4 h',
+      courseDescription: 'Learn Dart from 0 to Hero',
+      courseImageUrl: 'assets/images/9.png',
+      coursePrice: '50',
+      coursePlaylistId: 'PL6yRaaP0WPkVLSOchfoIA0ZXySz4eSYV2'),
 ];
