@@ -1,54 +1,108 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'video.dart';
 
-// This screen displays a YouTube video player
 class VideoPlayerScreen extends StatefulWidget {
-  final String videoId; // The ID of the YouTube video to be played
-  final String videoTitle; // The title of the YouTube video
+  final String videoId;
+  final String videoTitle;
+  final List<Video> allVideos;
+  final int initialIndex;
 
-  // Constructor to initialize the videoId and videoTitle
-  const VideoPlayerScreen(
-      {super.key, required this.videoId, required this.videoTitle});
+  const VideoPlayerScreen({
+    super.key,
+    required this.videoId,
+    required this.videoTitle,
+    required this.allVideos,
+    required this.initialIndex,
+  });
 
   @override
   _VideoPlayerScreenState createState() => _VideoPlayerScreenState();
 }
 
 class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
-  late YoutubePlayerController _controller; // Controller for the YouTube player
+  late YoutubePlayerController _controller;
+  late List<Video> _subsequentVideos;
 
   @override
   void initState() {
     super.initState();
-    // Initialize the YouTube player controller with the video ID and settings
     _controller = YoutubePlayerController(
-      initialVideoId: widget.videoId, // Set the initial video ID
+      initialVideoId: widget.videoId,
       flags: const YoutubePlayerFlags(
-        autoPlay: true, // Automatically play the video when the player loads
-        mute: false, // Do not mute the video
+        autoPlay: true,
+        mute: false,
       ),
     );
+    _subsequentVideos = widget.allVideos.sublist(widget.initialIndex + 1);
   }
 
   @override
   void dispose() {
-    // Dispose of the controller when the widget is disposed
     _controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar:
-          AppBar(title: Text(widget.videoTitle)), // App bar with video title,
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
 
-      body: YoutubePlayer(
-        controller: _controller, // The controller for the YouTube player
-        showVideoProgressIndicator: true, // Show the video progress indicator
-        progressIndicatorColor:
-            Colors.red, // Set the color of the progress indicator to red
-      ),
+    return Scaffold(
+      appBar: isLandscape
+          ? null // No AppBar in landscape mode
+          : AppBar(
+              title: Text(widget.videoTitle),
+            ),
+      body: isLandscape
+          ? Center(
+              child: YoutubePlayer(
+                controller: _controller,
+                showVideoProgressIndicator: true,
+                progressIndicatorColor: Colors.red,
+              ),
+            )
+          : Column(
+              children: [
+                YoutubePlayer(
+                  controller: _controller,
+                  showVideoProgressIndicator: true,
+                  progressIndicatorColor: Colors.red,
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    padding: const EdgeInsets.all(8.0),
+                    itemCount: _subsequentVideos.length,
+                    itemBuilder: (context, index) {
+                      final video = _subsequentVideos[index];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: ListTile(
+                          leading: video.thumbnailUrl.isNotEmpty
+                              ? Image.network(video.thumbnailUrl,
+                                  width: 60, height: 40, fit: BoxFit.cover)
+                              : const Icon(Icons.video_library, size: 40),
+                          title: Text(video.title),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => VideoPlayerScreen(
+                                  videoId: video.videoId,
+                                  videoTitle: video.title,
+                                  allVideos: widget.allVideos,
+                                  initialIndex: widget.allVideos.indexOf(video),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
     );
   }
 }
