@@ -1,3 +1,4 @@
+import 'package:edtech_app/constns/color_text_size.dart';
 import 'package:flutter/material.dart';
 import 'video.dart';
 import 'youtube_service.dart';
@@ -41,10 +42,39 @@ class _VideoListScreenState extends State<VideoListScreen> {
           future: _videosFuture,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasError) {
               return Center(
-                  child: Text("Error loading videos: ${snapshot.error}"));
+                  child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(primary_color),
+              ));
+            } else if (snapshot.hasError) {
+              return AlertDialog(
+                title: const Text('Error'),
+                content: const SingleChildScrollView(
+                  child: ListBody(
+                    children: <Widget>[
+                      Text('An Error happen.'),
+                      Text('Please choose what you want do?'),
+                    ],
+                  ),
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: const Text('Approve'),
+                    onPressed: () {
+                      setState(() {
+                        _videosFuture = _youtubeService.fetchVideosFromPlaylist(
+                            widget
+                                .playlistId); // Replace with your method to refetch videos
+                      });
+                    },
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('Cancel')),
+                ],
+              );
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
               return const Center(child: Text("No videos found"));
             }
